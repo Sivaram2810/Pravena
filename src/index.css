@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap');
+@import "tailwindcss";
+
+/* Global resets */
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  background: #000008;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 105, 180, 0.35);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 105, 180, 0.6);
+}
+
+/* Selection color */
+::selection {
+  background: rgba(255, 105, 180, 0.3);
+  color: white;
+}
+
+/* Smooth image rendering */
+img {
+  image-rendering: auto;
+  max-width: 100%;
+}
+
+/* Focus ring */
+button:focus-visible {
+  outline: 2px solid rgba(255, 105, 180, 0.6);
+  outline-offset: 2px;
+}
