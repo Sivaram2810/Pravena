@@ -1,53 +1,68 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap');
-@import "tailwindcss";
+import { useState } from 'react'
+import { Opening } from './components/opening'
+import { SolarHub } from './components/solar-hub'
+import { PhotoGallery } from './components/photo-gallery'
+import { Chronicles } from './components/chronicles'
+import { Echoes } from './components/echoes'
+import { Oracle } from './components/oracle'
+import { Eternity } from './components/eternity'
+import { Serendipity } from './components/serendipity'
+import { Void } from './components/void-planet'
+import { AURA_PHOTOS, COSMOS_PHOTOS, type PlanetId } from './lib/birthday-data'
 
-/* Global resets */
-*, *::before, *::after {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-}
+type Screen = 'opening' | 'hub' | PlanetId
 
-html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
+export default function App() {
+  const [screen, setScreen] = useState<Screen>('opening')
+  const [fading, setFading] = useState(false)
 
-body {
-  overflow-x: hidden;
-  margin: 0;
-  padding: 0;
-  background: #000008;
-}
+  const transition = (next: Screen) => {
+    setFading(true)
+    setTimeout(() => {
+      setScreen(next)
+      window.scrollTo(0, 0)
+      setFading(false)
+    }, 600)
+  }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 4px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 105, 180, 0.35);
-  border-radius: 2px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 105, 180, 0.6);
-}
+  const toHub = () => transition('hub')
 
-/* Selection color */
-::selection {
-  background: rgba(255, 105, 180, 0.3);
-  color: white;
-}
+  return (
+    <main className="relative min-h-[100svh] w-full" style={{ background: '#050816' }}>
+      {/* fade overlay */}
+      <div
+        className="pointer-events-none fixed inset-0 z-[100] transition-opacity duration-500"
+        style={{ background: '#050816', opacity: fading ? 1 : 0 }}
+      />
 
-/* Smooth image rendering */
-img {
-  image-rendering: auto;
-  max-width: 100%;
-}
+      {screen === 'opening' && <Opening onEnter={toHub} />}
+      {screen === 'hub' && <SolarHub onNavigate={(id) => transition(id)} />}
 
-/* Focus ring */
-button:focus-visible {
-  outline: 2px solid rgba(255, 105, 180, 0.6);
-  outline-offset: 2px;
+      {screen === 'aura' && (
+        <PhotoGallery
+          photos={AURA_PHOTOS}
+          title="AURA"
+          accent="#9b7bff"
+          glow="155,123,255"
+          onBack={toHub}
+        />
+      )}
+      {screen === 'cosmos' && (
+        <PhotoGallery
+          photos={COSMOS_PHOTOS}
+          title="COSMOS"
+          accent="#ff7ab6"
+          glow="255,122,182"
+          heartbeat
+          onBack={toHub}
+        />
+      )}
+      {screen === 'chronicles' && <Chronicles onBack={toHub} />}
+      {screen === 'echoes' && <Echoes onBack={toHub} />}
+      {screen === 'oracle' && <Oracle onBack={toHub} />}
+      {screen === 'eternity' && <Eternity onBack={toHub} />}
+      {screen === 'serendipity' && <Serendipity onBack={toHub} />}
+      {screen === 'void' && <Void onLeave={toHub} />}
+    </main>
+  )
 }
