@@ -110,29 +110,21 @@ const COLOR_MAP = {
   gold: { c: '#f7d774', glow: '247,215,116' },
 }
 
-// Points traced along a parametric heart curve, then pushed outward
-// radially from the heart's center by varying amounts so consecutive
-// stars don't sit at the same distance from each other. Each point also
-// carries a "labelSide" so neighboring name labels alternate above/below
-// the dot instead of stacking in the same band and colliding.
-const HEART_CENTER = { top: 50, left: 50 }
-
-const HEART_POSITIONS: { top: string; left: string; labelSide: 'top' | 'bottom' }[] = [
-  { top: '26.5%', left: '50.4%', labelSide: 'top' },
-  { top: '14.0%', left: '59.5%', labelSide: 'bottom' },
-  { top: '11.0%', left: '78.0%', labelSide: 'top' },
-  { top: '27.5%', left: '92.5%', labelSide: 'bottom' },
-  { top: '50.4%', left: '87.0%', labelSide: 'top' },
-  { top: '70.5%', left: '67.5%', labelSide: 'bottom' },
-  { top: '86.5%', left: '52.0%', labelSide: 'top' },
-  { top: '93.5%', left: '50.0%', labelSide: 'bottom' },
-  { top: '86.5%', left: '48.0%', labelSide: 'top' },
-  { top: '70.5%', left: '32.5%', labelSide: 'bottom' },
-  { top: '50.4%', left: '13.0%', labelSide: 'top' },
-  { top: '27.5%', left: '7.5%', labelSide: 'bottom' },
-  { top: '11.0%', left: '22.0%', labelSide: 'top' },
-  { top: '14.0%', left: '40.5%', labelSide: 'bottom' },
-  { top: '26.5%', left: '49.6%', labelSide: 'top' },
+const POSITIONS = [
+  { top: '18%', left: '20%' },
+  { top: '28%', left: '70%' },
+  { top: '45%', left: '38%' },
+  { top: '40%', left: '82%' },
+  { top: '60%', left: '15%' },
+  { top: '68%', left: '55%' },
+  { top: '55%', left: '72%' },
+  { top: '78%', left: '32%' },
+  { top: '14%', left: '50%' },
+  { top: '80%', left: '78%' },
+  { top: '30%', left: '48%' },
+  { top: '22%', left: '88%' },
+  { top: '50%', left: '25%' },
+  { top: '72%', left: '10%' },
 ]
 
 export function Echoes({ onBack }: { onBack: () => void }) {
@@ -152,45 +144,19 @@ export function Echoes({ onBack }: { onBack: () => void }) {
         </p>
       </div>
 
-      <div className="relative z-10 mx-auto mt-6 h-[72svh] w-full max-w-2xl">
-        {/* Center title sitting inside the heart shape */}
-        <div
-          className="absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 px-6 text-center"
-          style={{ width: '42%' }}
-        >
-          <p
-            className="text-sm italic leading-snug sm:text-base"
-            style={{
-              fontFamily: 'var(--font-cinzel)',
-              letterSpacing: '0.08em',
-              color: 'rgba(245,236,216,0.75)',
-              textShadow: '0 0 16px rgba(247,215,116,0.35)',
-            }}
-          >
-            From some people<br />who are special<br />to you
-          </p>
-        </div>
-
+      <div className="relative z-10 mx-auto mt-6 h-[68svh] w-full max-w-5xl">
         {FRIENDS.map((friend, i) => {
-          const pos = HEART_POSITIONS[i % HEART_POSITIONS.length]
+          const pos = POSITIONS[i % POSITIONS.length]
           const { c, glow } = COLOR_MAP[friend.color]
           const locked = friend.type === 'locked'
-          const labelAbove = pos.labelSide === 'top'
           return (
             <button
               key={friend.name}
               onClick={() => !locked && setActive(friend)}
               disabled={locked}
               aria-label={locked ? `${friend.name} — coming soon` : `Open message from ${friend.name}`}
-              className="group absolute z-10 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-2"
-              style={{
-                top: pos.top,
-                left: pos.left,
-                // Reverse the flex direction so the label can sit above
-                // the dot for alternating points, keeping text bands
-                // from overlapping between adjacent stars.
-                flexDirection: labelAbove ? 'column-reverse' : 'column',
-              }}
+              className="group absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-2"
+              style={{ top: pos.top, left: pos.left }}
             >
               <span
                 className="animate-float rounded-full transition-transform group-hover:scale-150"
@@ -203,19 +169,11 @@ export function Echoes({ onBack }: { onBack: () => void }) {
                   display: 'block',
                 }}
               />
-              <span
-                className="whitespace-nowrap"
-                style={{
-                  fontFamily: 'var(--font-cinzel)',
-                  fontSize: 10,
-                  letterSpacing: '0.18em',
-                  color: locked ? 'rgba(245,236,216,0.4)' : c,
-                }}
-              >
+              <span style={{ fontFamily: 'var(--font-cinzel)', fontSize: 10, letterSpacing: '0.18em', color: locked ? 'rgba(245,236,216,0.4)' : c }}>
                 {friend.name}
               </span>
               {locked && (
-                <span className="flex items-center gap-1 whitespace-nowrap text-[10px] italic" style={{ color: 'rgba(245,236,216,0.35)' }}>
+                <span className="flex items-center gap-1 text-[10px] italic" style={{ color: 'rgba(245,236,216,0.35)' }}>
                   <Lock className="size-3" /> Coming soon ✦
                 </span>
               )}
