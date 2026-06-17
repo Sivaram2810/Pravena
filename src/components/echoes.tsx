@@ -31,6 +31,12 @@ export const FRIENDS: Friend[] = [
     content: 'https://www.image2url.com/r2/default/videos/1781276245485-f3a8387f-24cf-43ab-a774-92e8e2f2b060.mp4'
   },
   {
+    name: 'Nishmitha',
+    color: 'gold',
+    type: 'video',
+    content: 'https://cdn.imageurlgenerator.com/uploads/22a45aee-7a59-4f86-92e8-0695ba4966a7.mp4'
+  },
+  {
     name: 'Preethi',
     color: 'pink',
     type: 'video',
@@ -211,6 +217,13 @@ export function Echoes({ onBack }: { onBack: () => void }) {
               <div className="mt-6 border-t pt-6" style={{ borderColor: 'rgba(155,123,255,0.3)' }}>
                 <p className="text-center text-lg italic leading-relaxed" style={{ color: 'rgba(245,236,216,0.9)' }}>
                   Happiest birthday Mayiluh 🎀💋😭 Seven years... can you believe it? From sharing the smallest details of our lives to standing by each other through every high and low, you've been one of the most precious parts of my journey 🫶🏻 You are not just my best friend; you are my home 🌍 my safe place, my biggest supporter 💌 Distance may have kept us apart physically, but it has never weakened our bond 💎 Thank you for all the laughter, the endless conversations, the comfort during difficult times 🤌🏻 You deserve every beautiful thing life has to offer. I love you endlessly. Forever yours, your Mayiluh 😉💕
+                </p>
+              </div>
+            )}
+            {active.name === 'Nishmitha' && (
+              <div className="mt-6 border-t pt-6" style={{ borderColor: 'rgba(155,123,255,0.3)' }}>
+                <p className="text-center text-lg italic leading-relaxed" style={{ color: 'rgba(245,236,216,0.9)' }}>
+                  Happy 18th Birthday to the most beautiful soul I know! 🎂💗 Today marks a special chapter in your life, and I feel so lucky to be a part of it. Even though we've spent time apart and haven't always had countless memories together, the bond we share means more to me than words can express. You are not just my best friend, you are my sister by heart and u will always be my first kid. 😘💯The love, care, and kindness you show always touch my heart. Watching you brings so much happiness because you have such a pure and genuine soul. You are one of the very few people who truly matter to me, and I will always cherish you. As you step into adulthood, I hope your life is filled with endless happiness, success, love, and beautiful moments. Thank you for being exactly who you are. No matter where life takes us, you'll always have a special place in my heart. Happy 18th birthday, my forever sister! 💕✨
                 </p>
               </div>
             )}
