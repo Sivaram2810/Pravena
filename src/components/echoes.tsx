@@ -80,8 +80,8 @@ export const FRIENDS: Friend[] = [
   {
     name: 'Ritika',
     color: 'pink',
-    type: 'locked',
-    content: ''
+    type: 'video',
+    content: 'https://videotourl.com/videos/1781720534997-af7f83c7-492d-49f3-bddd-824acc0a6581.webm'
   },
   {
     name: 'Sushma',
