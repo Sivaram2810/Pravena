@@ -145,7 +145,7 @@ export function SolarHub({ onNavigate }: { onNavigate: (id: PlanetId) => void })
         </div>
 
         <p style={{ marginTop: 36, textAlign: 'center', fontSize: 13, fontStyle: 'italic', color: 'rgba(245,236,216,0.4)' }}>
-          Tap a planet to explore. Some things are hidden — be still, and watch.
+          Tap a planet to explore. — be still, and watch.
         </p>
       </div>
 
