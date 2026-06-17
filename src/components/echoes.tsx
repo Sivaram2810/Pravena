@@ -61,6 +61,12 @@ export const FRIENDS: Friend[] = [
     content: 'https://videotourl.com/videos/1781277305239-de3116ee-ee79-494b-808a-280face23303.mp4'
   },
   {
+    name: 'Rithika & Vaishali',
+    color: 'gold',
+    type: 'video',
+    content: 'https://cdn.imageurlgenerator.com/uploads/046fccb2-b2c1-499a-899f-ec92eaf16d96.mp4'
+  },
+  {
     name: 'Sai',
     color: 'gold',
     type: 'locked',
@@ -107,6 +113,7 @@ const POSITIONS = [
   { top: '68%', left: '55%' },
   { top: '55%', left: '72%' },
   { top: '78%', left: '32%' },
+  { top: '14%', left: '50%' },
   { top: '80%', left: '78%' },
   { top: '30%', left: '48%' },
   { top: '22%', left: '88%' },
