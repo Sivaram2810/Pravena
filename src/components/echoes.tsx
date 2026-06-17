@@ -3,7 +3,6 @@ import { X, Lock } from 'lucide-react'
 import { Starfield } from './starfield'
 import { BackButton } from './back-button'
 
-// Updated friend data with all the information provided
 export interface Friend {
   name: string
   color: 'pink' | 'purple' | 'gold'
@@ -16,7 +15,7 @@ export const FRIENDS: Friend[] = [
     name: 'Risha',
     color: 'pink',
     type: 'note',
-    content: 'Wishing you a happiest birthday Pravee 💌 I love you more than you think 😭 I swear I\'m very blessed to have a friend like you 😭💖 You are one of my closest friends 🧡 and you are so important to me 🫀 Every important decision I take in my life, I discuss it with you first 🙂 I hope this bond will be forever ♾️ Always be happy dey 🧿 Once again, happiest birthday 🥺💋 Love you so so much ♾️'
+    content: "Wishing you a happiest birthday Pravee 💌 I love you more than you think 😭 I swear I'm very blessed to have a friend like you 😭💖 You are one of my closest friends 🧡 and you are so important to me 🫀 Every important decision I take in my life, I discuss it with you first 🙂 I hope this bond will be forever ♾️ Always be happy dey 🧿 Once again, happiest birthday 🥺💋 Love you so so much ♾️"
   },
   {
     name: 'Vidharshana',
@@ -110,21 +109,22 @@ const COLOR_MAP = {
   gold: { c: '#f7d774', glow: '247,215,116' },
 }
 
-const POSITIONS = [
-  { top: '18%', left: '20%' },
-  { top: '28%', left: '70%' },
-  { top: '45%', left: '38%' },
-  { top: '40%', left: '82%' },
-  { top: '60%', left: '15%' },
-  { top: '68%', left: '55%' },
-  { top: '55%', left: '72%' },
-  { top: '78%', left: '32%' },
-  { top: '14%', left: '50%' },
-  { top: '80%', left: '78%' },
-  { top: '30%', left: '48%' },
-  { top: '22%', left: '88%' },
-  { top: '50%', left: '25%' },
-  { top: '72%', left: '10%' },
+const HEART_POSITIONS = [
+  { top: '8%', left: '18%' },
+  { top: '12%', left: '35%' },
+  { top: '18%', left: '62%' },
+  { top: '14%', left: '84%' },
+  { top: '34%', left: '10%' },
+  { top: '40%', left: '42%' },
+  { top: '38%', left: '88%' },
+  { top: '56%', left: '14%' },
+  { top: '50%', left: '50%' },
+  { top: '56%', left: '82%' },
+  { top: '72%', left: '28%' },
+  { top: '76%', left: '70%' },
+  { top: '90%', left: '50%' },
+  { top: '96%', left: '44%' },
+  { top: '96%', left: '56%' },
 ]
 
 export function Echoes({ onBack }: { onBack: () => void }) {
@@ -146,7 +146,7 @@ export function Echoes({ onBack }: { onBack: () => void }) {
 
       <div className="relative z-10 mx-auto mt-6 h-[68svh] w-full max-w-5xl">
         {FRIENDS.map((friend, i) => {
-          const pos = POSITIONS[i % POSITIONS.length]
+          const pos = HEART_POSITIONS[i % HEART_POSITIONS.length]
           const { c, glow } = COLOR_MAP[friend.color]
           const locked = friend.type === 'locked'
           return (
@@ -169,7 +169,7 @@ export function Echoes({ onBack }: { onBack: () => void }) {
                   display: 'block',
                 }}
               />
-              <span style={{ fontFamily: 'var(--font-cinzel)', fontSize: 10, letterSpacing: '0.18em', color: locked ? 'rgba(245,236,216,0.4)' : c }}>
+              <span style={{ fontFamily: 'var(--font-cinzel)', fontSize: 12, letterSpacing: '0.12em', color: locked ? 'rgba(245,236,216,0.4)' : c }}>
                 {friend.name}
               </span>
               {locked && (
@@ -189,7 +189,7 @@ export function Echoes({ onBack }: { onBack: () => void }) {
           onClick={() => setActive(null)}
         >
           <div
-            className="glass animate-scale-in relative max-h-[80svh] w-full max-w-lg overflow-y-auto rounded-3xl p-8 opacity-0 no-scrollbar"
+            className="glass animate-scale-in relative max-h-[80svh] w-full max-w-lg overflow-y-auto rounded-3xl p-8 no-scrollbar"
             style={{ boxShadow: `0 0 60px rgba(${COLOR_MAP[active.color].glow},0.4)` }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -212,7 +212,6 @@ export function Echoes({ onBack }: { onBack: () => void }) {
               </video>
             )}
 
-            {/* Special section for Vidharshana - shows both video and letter */}
             {active.name === 'Vidharshana' && (
               <div className="mt-6 border-t pt-6" style={{ borderColor: 'rgba(155,123,255,0.3)' }}>
                 <p className="text-center text-lg italic leading-relaxed" style={{ color: 'rgba(245,236,216,0.9)' }}>
@@ -220,6 +219,7 @@ export function Echoes({ onBack }: { onBack: () => void }) {
                 </p>
               </div>
             )}
+            
             {active.name === 'Nishmitha' && (
               <div className="mt-6 border-t pt-6" style={{ borderColor: 'rgba(155,123,255,0.3)' }}>
                 <p className="text-center text-lg italic leading-relaxed" style={{ color: 'rgba(245,236,216,0.9)' }}>
