@@ -110,21 +110,24 @@ const COLOR_MAP = {
   gold: { c: '#f7d774', glow: '247,215,116' },
 }
 
-const POSITIONS = [
-  { top: '18%', left: '20%' },
-  { top: '28%', left: '70%' },
-  { top: '45%', left: '38%' },
-  { top: '40%', left: '82%' },
-  { top: '60%', left: '15%' },
-  { top: '68%', left: '55%' },
-  { top: '55%', left: '72%' },
-  { top: '78%', left: '32%' },
-  { top: '14%', left: '50%' },
-  { top: '80%', left: '78%' },
-  { top: '30%', left: '48%' },
-  { top: '22%', left: '88%' },
-  { top: '50%', left: '25%' },
-  { top: '72%', left: '10%' },
+// Points traced along a parametric heart curve so every star sits evenly
+// spaced on the outline with no overlap, leaving the middle open for a title.
+const HEART_POSITIONS = [
+  { top: '30.1%', left: '50.4%' },
+  { top: '18.2%', left: '57.9%' },
+  { top: '15.3%', left: '75.4%' },
+  { top: '29.8%', left: '88.5%' },
+  { top: '50.4%', left: '83.6%' },
+  { top: '68.6%', left: '66.1%' },
+  { top: '83.4%', left: '52.6%' },
+  { top: '90.0%', left: '50.0%' },
+  { top: '83.4%', left: '47.4%' },
+  { top: '68.6%', left: '33.9%' },
+  { top: '50.4%', left: '16.4%' },
+  { top: '29.8%', left: '11.5%' },
+  { top: '15.3%', left: '24.6%' },
+  { top: '18.2%', left: '42.1%' },
+  { top: '30.1%', left: '49.6%' },
 ]
 
 export function Echoes({ onBack }: { onBack: () => void }) {
@@ -144,9 +147,27 @@ export function Echoes({ onBack }: { onBack: () => void }) {
         </p>
       </div>
 
-      <div className="relative z-10 mx-auto mt-6 h-[68svh] w-full max-w-5xl">
+      <div className="relative z-10 mx-auto mt-6 h-[68svh] w-full max-w-2xl">
+        {/* Center title sitting inside the heart shape */}
+        <div
+          className="absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 px-6 text-center"
+          style={{ width: '46%' }}
+        >
+          <p
+            className="text-sm italic leading-snug sm:text-base"
+            style={{
+              fontFamily: 'var(--font-cinzel)',
+              letterSpacing: '0.08em',
+              color: 'rgba(245,236,216,0.75)',
+              textShadow: '0 0 16px rgba(247,215,116,0.35)',
+            }}
+          >
+            From some people<br />who are special<br />to you
+          </p>
+        </div>
+
         {FRIENDS.map((friend, i) => {
-          const pos = POSITIONS[i % POSITIONS.length]
+          const pos = HEART_POSITIONS[i % HEART_POSITIONS.length]
           const { c, glow } = COLOR_MAP[friend.color]
           const locked = friend.type === 'locked'
           return (
@@ -155,7 +176,7 @@ export function Echoes({ onBack }: { onBack: () => void }) {
               onClick={() => !locked && setActive(friend)}
               disabled={locked}
               aria-label={locked ? `${friend.name} — coming soon` : `Open message from ${friend.name}`}
-              className="group absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-2"
+              className="group absolute z-10 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-2"
               style={{ top: pos.top, left: pos.left }}
             >
               <span
